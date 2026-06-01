@@ -1,3 +1,8 @@
+#B ( DIMENSÃO DO CENÁRIO)
+BG_WIDTH = 576
+BG_HEIGHT = 324
+
+
 #C
 C_ORANGE = (255, 128, 0)
 C_WHITE = (255, 255, 255)
@@ -10,10 +15,11 @@ C_RED = (255, 0, 0)
 #E
 ENTETY_SPEED ={
     'LEVEL1BG0':0,
-    'LEVEL1BG1':1,
-    'LEVEL1BG2':2,
-    'LEVEL1BG3':3,
-    'LEVEL1BG4':4,
+    'LEVEL1BG1':0,
+    'LEVEL1BG2':0,
+    'LEVEL1BG3':0,
+    'LEVEL1BG4':0,
+    'LEVEL1BG5':0,
 }
 
 

@@ -12,6 +12,7 @@ class Menu:
     def __init__(self, window):
         self.window = window
         self.surf = pygame.image.load('./asset/menu.png').convert_alpha()
+        self.surf = pygame.transform.scale(self.surf, (WIN_WIDTH, WIN_WIDTH))
         self.rect = self.surf.get_rect(left=0, top=0)
 
     def run(self):
