@@ -23,3 +23,5 @@ class EntityFactory:
                 return Player('Player',(5,WIN_WIDTH / 2 -30, WIN_HEIGHT -10 ))
             case 'Enemy1':
                 return Enemy('Enemy1', (WIN_WIDTH +50, WIN_HEIGHT -70))
+            case 'Enemy2':
+                return Enemy('Enemy2', (WIN_WIDTH + 30, WIN_HEIGHT - 70))

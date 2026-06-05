@@ -2,13 +2,16 @@
 # -*- coding: utf-8 -*-
 import pygame
 
-from const import WIN_HEIGHT, WIN_WIDTH, ENTITY_SPEED
+from const import WIN_HEIGHT, WIN_WIDTH, ENTITY_SPEED, ENTITY_SHOOT_DELAY, PLAYER_KEY_SHOOT
 from entity import Entity
+from pLayerShot import PlayerShot
+
 
 class Player(Entity):
 
-    def __init__(self, name:str , position):
+    def __init__(self, name: str, position):
         super().__init__(name, position)
+        self.shot_delay = ENTITY_SHOOT_DELAY[self.name]
 
     #     try:
     #         # Carrega a imagem
@@ -82,14 +85,29 @@ class Player(Entity):
 
     pass
 
-
     def move(self, ):
 
-       pressed_key = pygame.key.get_pressed()
-       if pressed_key[pygame.K_RIGHT]  and self.rect.right < WIN_WIDTH:
-           self.rect.right += ENTITY_SPEED[self.name]
+        pressed_key = pygame.key.get_pressed()
+        if pressed_key[pygame.K_RIGHT] and self.rect.right < WIN_WIDTH:
+            self.rect.right += ENTITY_SPEED[self.name]
 
-       if pressed_key[pygame.K_LEFT] and self.rect.left > 0:
-           self.rect.left -= ENTITY_SPEED[self.name]
+        if pressed_key[pygame.K_LEFT] and self.rect.left > 0:
+            self.rect.left -= ENTITY_SPEED[self.name]
 
-       pass
+        pass
+
+    def shoot(self):
+        self.shot_delay -= 1
+        if self.shot_delay == 0:
+            self.shot_delay = ENTITY_SHOOT_DELAY[self.name]
+            pressed_key = pygame.key.get_pressed()
+            if pressed_key[PLAYER_KEY_SHOOT[self.name]]:
+                gun_offset_x = self.rect.width - 7
+                gun_offset_y = 33
+
+                shot_x = self.rect.x + gun_offset_x
+                shot_y = self.rect.y + gun_offset_y
+
+                return PlayerShot(name=f'{self.name}Shot', position=(shot_x, shot_y))
+
+
