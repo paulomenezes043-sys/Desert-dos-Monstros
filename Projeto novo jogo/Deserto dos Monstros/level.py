@@ -8,8 +8,7 @@ from pygame import Surface
 from pygame.font import Font
 from pygame.rect import Rect
 
-from const import EVENT_ENEMY, SPAWN_TIME, C_BLACK, WIN_WIDTH, C_BLUE, EVENT_TIMEOUT, TIMEOUT_STEP, TIMEOUT_LEVEL, \
-    MENU_OPTION
+from const import EVENT_ENEMY, SPAWN_TIME, C_BLACK, WIN_WIDTH, C_BLUE, EVENT_TIMEOUT, TIMEOUT_STEP, TIMEOUT_LEVEL
 from enemy import Enemy
 from entity import Entity
 from entityFactory import EntityFactory
@@ -34,7 +33,7 @@ class Level:
 
 
     def run(self, player_score: list[int]):
-        pygame.mixer.music.load('./asset/menu.wav')
+        pygame.mixer.music.load(f'./asset/{self.name}.wav')
         pygame.mixer.music.play(-1)
         clock = pygame.time.Clock()
         while True:
