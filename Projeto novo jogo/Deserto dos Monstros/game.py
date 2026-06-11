@@ -11,6 +11,8 @@ from menu import Menu
 class Game:
     def __init__(self):
         pygame.init()
+        pygame.mixer.init()
+        pygame.mixer.set_num_channels(16)
         self.window = pygame.display.set_mode(size=(WIN_WIDTH, WIN_HEIGHT))
 
     def run(self):
@@ -39,5 +41,4 @@ class Game:
                 quit()  # end pygame
             else:
                 pass
-        #   pygame.quit()
-        #   sys.exit()
+

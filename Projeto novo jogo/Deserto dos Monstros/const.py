@@ -102,6 +102,14 @@ ENTITY_SHOOT_DELAY = {
     'Enemy2': 100,
 }
 
+
+#G
+GRAVITY = 1.5
+FLOOR_Y = 325
+
+
+
+
 # M
 MENU_OPTION = ('NEW GAME', #0
                'MENU',  #1

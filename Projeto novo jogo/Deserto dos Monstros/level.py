@@ -25,8 +25,12 @@ class Level:
         self.entity_list: list[Entity] = []
         self.entity_list.extend(EntityFactory.get_entity(self.name + 'BG'))
         player = EntityFactory.get_entity('Player')
+        player.shoot_sound = None  # ← importante
         player.score = player_score[0]
         self.entity_list.append(player)
+        self.shoot_sound = None
+        self.enemy_attack_sound = None
+
 
         pygame.time.set_timer(EVENT_ENEMY, SPAWN_TIME)
         pygame.time.set_timer(EVENT_TIMEOUT, TIMEOUT_STEP)
@@ -36,11 +40,26 @@ class Level:
         pygame.mixer.music.load(f'./asset/{self.name}.wav')
         pygame.mixer.music.play(-1)
         clock = pygame.time.Clock()
+        try:
+         self.shoot_sound = pygame.mixer.Sound(f'./asset/sound_tiro1.wav')
+         self.enemy_attack_sound = pygame.mixer.Sound(f'./asset/attack_enemy1.wav')
+         self.shoot_sound.set_volume(1.0)
+         self.enemy_attack_sound.set_volume(0.7)
+         print('Sons Carregados')
+        except Exception as e:
+            print('Erro ao carregar o som',e)
+        for ent in self.entity_list:
+            if isinstance(ent, Player):
+                ent.shoot_sound = self.shoot_sound
+
+
         while True:
             clock.tick(60)
             for ent in self.entity_list:
                 self.window.blit(source=ent.surf, dest=ent.rect)
                 ent.move()
+                if hasattr(ent,'update'):
+                    ent.update()
                 if isinstance(ent, (Player, Enemy)):
                     shoot = ent.shoot()
                     if shoot is not None:
@@ -55,7 +74,9 @@ class Level:
                     sys.exit()
                 if event.type == EVENT_ENEMY:
                     choice = random.choice(('Enemy1', 'Enemy2'))
-                    self.entity_list.append(EntityFactory.get_entity(choice))
+                    new_enemy = EntityFactory.get_entity(choice)
+                    new_enemy.enemy_attack_sound = self.enemy_attack_sound
+                    self.entity_list.append(new_enemy)
                 if event.type == EVENT_TIMEOUT:
                     self.timeout -= TIMEOUT_STEP
                     if self.timeout == 0:
