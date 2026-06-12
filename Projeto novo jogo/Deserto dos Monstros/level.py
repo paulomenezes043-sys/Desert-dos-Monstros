@@ -13,6 +13,7 @@ from enemy import Enemy
 from entity import Entity
 from entityFactory import EntityFactory
 from entityMediator import EntityMediator
+from menu import Menu
 from player import Player
 
 
@@ -43,8 +44,8 @@ class Level:
         try:
          self.shoot_sound = pygame.mixer.Sound(f'./asset/sound_tiro1.wav')
          self.enemy_attack_sound = pygame.mixer.Sound(f'./asset/attack_enemy1.wav')
-         self.shoot_sound.set_volume(1.0)
-         self.enemy_attack_sound.set_volume(0.7)
+         self.shoot_sound.set_volume(0.8)
+         self.enemy_attack_sound.set_volume(0.6)
          print('Sons Carregados')
         except Exception as e:
             print('Erro ao carregar o som',e)
@@ -92,7 +93,13 @@ class Level:
                         found_player = True
 
                 if not found_player:
-                    return False
+                    game_over_screen = Menu(self.window)
+                    # Captura a escolha do jogador ("RESTART" ou "MENU")
+                    escolha = game_over_screen.show_game_over()
+                    if escolha == "RESTART":
+                        return "RESTART"  # Avisa o game.py para reiniciar esta fase
+                    else:
+                     return False
 
 
             self.level_text(14, f'{self.name} - Timeout:{self.timeout / 1000:.1f}s', C_BLACK, (6, 3))

@@ -7,7 +7,7 @@ from pygame.constants import K_RETURN, K_BACKSPACE, K_ESCAPE
 from pygame.font import Font
 
 from DBProxy import DBProxy
-from const import WIN_WIDTH, C_BLUE, SCORE_POS, MENU_OPTION, C_WHITE, C_YELLOW
+from const import WIN_WIDTH, C_BLUE, SCORE_POS, MENU_OPTION, C_WHITE, C_YELLOW, WIN_HEIGHT, C_RED
 
 
 class Score:
@@ -74,6 +74,33 @@ class Score:
                     if event.key == K_ESCAPE:
                         return
             pygame.display.flip()
+
+    def show_game_over(self):
+        # Garante que cliques antigos não interfiram na tela de Game Over
+        pygame.event.clear()
+
+        while True:
+            # 1. Limpa a tela desenhando o fundo do deserto (ou uma tela preta se preferir)
+            self.window.blit(self.surf, self.rect)
+
+            # 2. Desenha o texto de derrota de forma imponente
+            self.menu_text(60, "GAME OVER", C_RED, (WIN_WIDTH / 2, WIN_HEIGHT / 2 - 50))
+
+            # Instrução em inglês para o jogador saber como voltar
+            self.menu_text(20, "Press ESC to Return to Menu", C_WHITE, (WIN_WIDTH / 2, WIN_HEIGHT / 2 + 50))
+
+            pygame.display.flip()
+
+            # 3. Escuta os comandos do jogador
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+
+                if event.type == pygame.KEYDOWN:
+                    # Se apertar ESC, sai do Game Over e volta pro menu principal
+                    if event.key == pygame.K_ESCAPE:
+                        return
 
 
     def score_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
