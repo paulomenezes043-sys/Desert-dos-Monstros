@@ -11,7 +11,7 @@ from player import Player
 class EntityFactory:
 
     @staticmethod
-    def get_entity(entity_name: str):
+    def get_entity(entity_name: str, position: tuple = None):
         match entity_name:
             case 'LEVEL1BG':
                 list_bg = []
@@ -26,8 +26,25 @@ class EntityFactory:
                     list_bg.append(Background(f'LEVEL2BG{i}', (WIN_WIDTH, 0)))
                 return list_bg
             case 'Player':
-                return Player('Player', (5, WIN_WIDTH / 2 - 30, WIN_HEIGHT - 10))
+                # Se passares uma posição específica no nível, ele usa. Se não, usa a padrão atual:
+                pos = position if position else (5, WIN_WIDTH / 2 - 30,
+                                                 WIN_HEIGHT - 10)  # Nota: verifica se querias mesmo 3 argumentos aqui na tua tupla do Player
+                return Player(name='Player', position=pos)
+
             case 'Enemy1':
-                return Enemy('Enemy1', (WIN_WIDTH + 50, WIN_HEIGHT - 70))
+                pos = position if position else (WIN_WIDTH + 50, WIN_HEIGHT - 70)
+                return Enemy(name='Enemy1', position=pos)
+
             case 'Enemy2':
-                return Enemy('Enemy2', (WIN_WIDTH + 30, WIN_HEIGHT - 70))
+                pos = position if position else (WIN_WIDTH + 30, WIN_HEIGHT - 70)
+                return Enemy(name='Enemy2', position=pos)
+
+            case 'Enemy3':
+                pos = position if position else (WIN_WIDTH + 0, WIN_HEIGHT - 80)
+                return Enemy(name='Enemy3', position=pos)
+            case 'Enemy4':
+                pos = position if position else (WIN_WIDTH + 30, WIN_HEIGHT - 80)
+                return Enemy(name='Enemy4', position=pos)
+            case 'Enemy5':
+                pos = position if position else (WIN_WIDTH + 60, WIN_HEIGHT - 70)
+                return Enemy(name='Enemy5', position=pos)

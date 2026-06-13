@@ -18,7 +18,7 @@ from player import Player
 
 
 class Level:
-    def __init__(self, window:Surface,  name: str , game_mode: str, player_score: list[int]):
+    def __init__(self, window:Surface,  name: str , game_mode: str, player_score: list[int],):
         self.timeout = TIMEOUT_LEVEL
         self.window = window
         self.name = name
@@ -74,7 +74,23 @@ class Level:
                     pygame.quit()
                     sys.exit()
                 if event.type == EVENT_ENEMY:
-                    choice = random.choice(('Enemy1', 'Enemy2'))
+                    # Seleciona o inimigo com base no nome do nível atual (self.name)
+                    if self.name == 'LEVEL1':
+                        choice = random.choice(('Enemy1', 'Enemy2'))   # Dois inimigos
+
+                    elif self.name == 'LEVEL2':
+                        choice = random.choice(('Enemy3', 'Enemy4'))
+
+                    elif self.name == 'LEVEL3':
+                        choice = random.choice(('Enemy2', 'Enemy4', 'Enemy5'))
+
+                    elif self.name == 'LEVEL4':
+                        choice = random.choice(('Enemy1','Enemy2','Enemy3', 'Enemy4', 'Enemy5'))
+
+                    else:
+                        choice = 'Enemy1'
+
+
                     new_enemy = EntityFactory.get_entity(choice)
                     new_enemy.enemy_attack_sound = self.enemy_attack_sound
                     self.entity_list.append(new_enemy)

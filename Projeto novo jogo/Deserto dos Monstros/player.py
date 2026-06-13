@@ -75,4 +75,5 @@ class Player(Entity):
 
                 return PlayerShot(name=f'{self.name}Shot', position=(shot_x, shot_y))
 
+
             return None
