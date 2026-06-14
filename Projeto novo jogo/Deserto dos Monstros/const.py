@@ -112,7 +112,7 @@ ENTITY_DAMAGE = {
     'LEVEL4BG3':0,
     'LEVEL4BG4':0,
     'Player': 1,
-    'PlayerShot': 40,
+    'PlayerShot': 45,
     'Enemy1': 1,
     'Enemy1Shot':35,
     'Enemy2': 1,

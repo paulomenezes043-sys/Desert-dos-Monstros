@@ -20,10 +20,11 @@ class Enemy(Entity):
 
         if self.shot_delay == 0:
             self.shot_delay = ENTITY_SHOOT_DELAY[self.name]
-            print(f'inimigo atirando tem som?{hasattr(self, 'enemy_attack_sound')}')
+            #print(f'inimigo atirando tem som?{hasattr(self, 'enemy_attack_sound')}')
             if hasattr(self, 'enemy_attack_sound'):
                 self.enemy_attack_sound.play()
-                print('DEU PLAY NO SOM')
+                #print('DEU PLAY NO SOM')
+                pass
             gun_offset_x = 1
             gun_offset_y = 35
 

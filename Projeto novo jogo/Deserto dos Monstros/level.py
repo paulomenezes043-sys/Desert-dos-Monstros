@@ -44,9 +44,10 @@ class Level:
             self.enemy_attack_sound = pygame.mixer.Sound(f'./asset/attack_enemy1.wav')
             self.shoot_sound.set_volume(0.3)
             self.enemy_attack_sound.set_volume(0.3)
-            print('Sons Carregados')
+            #print('Sons Carregados')
         except Exception as e:
-            print('Erro ao carregar o som', e)
+            #print('Erro ao carregar o som', e)
+            pass
         for ent in self.entity_list:
             if isinstance(ent, Player):
                 ent.shoot_sound = self.shoot_sound
