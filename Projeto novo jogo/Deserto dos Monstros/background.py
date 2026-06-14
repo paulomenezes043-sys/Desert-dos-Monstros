@@ -14,7 +14,7 @@ class Background(Entity):
         if hasattr(self, 'surf') and self.surf is not None:
             self.surf = transform.scale(self.surf, (BG_WIDTH, BG_HEIGHT))
 
-            #atualizar rect com tamanho novo
+
             self.rect = self.surf.get_rect(topleft=position)
 
 

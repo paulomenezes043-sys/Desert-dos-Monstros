@@ -25,7 +25,7 @@ class Game:
             if menu_return == MENU_OPTION[0]:
                 player_score = [0]
                 while True:
-                    player_score = [0]  # Reseta o score sempre que o loop recomeçar (Morte com Restart)
+                    player_score = [0]
 
                     # ================= FASE 1 =================
                     level = Level(self.window, 'LEVEL1', menu_return, player_score)
@@ -37,17 +37,33 @@ class Game:
                         break  # Sai do jogo e volta para o Menu Principal
 
                     # ================= FASE 2 =================
-                    # Se o código chegou aqui, significa que level_return foi True (passou da Fase 1)
+
                     level = Level(self.window, 'LEVEL2', menu_return, player_score)
+                    level_return = level.run(player_score)
+                    if level_return == "RESTART":
+                        continue
+                    elif level_return is False:
+                        break
+
+                    # ================= FASE 3 =================
+                    level = Level(self.window, 'LEVEL3', menu_return, player_score)
+                    level_return = level.run(player_score)
+                    if level_return == "RESTART":
+                        continue
+                    elif level_return is False:
+                        break
+
+                    # ================= FASE 4 =================
+                    level = Level(self.window, 'LEVEL4', menu_return, player_score)
                     level_return = level.run(player_score)
 
                     if level_return == "RESTART":
-                        continue  # Perde tudo! Volta lá para o início do loop (Fase 1 com score [0])
+                        continue
                     elif level_return is False:
-                        break  # Sai do jogo e volta para o Menu Principal
+                        break
                     elif level_return is True:
                         score.save(MENU_OPTION[0], menu_return, player_score)
-                        break  # Jogo finalizado com sucesso, sai do loop
+                        break  
 
 
 
@@ -64,4 +80,3 @@ class Game:
                 quit()  # end pygame
             else:
                 pass
-

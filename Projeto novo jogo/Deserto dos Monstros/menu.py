@@ -5,7 +5,7 @@ from pygame.font import Font
 from pygame.rect import Rect
 from pygame.surface import Surface
 
-from const import C_ORANGE, WIN_WIDTH, MENU_OPTION, C_RED, C_WHITE, C_BLUE, C_GREEN, C_BLACK, BG_HEIGHT, BG_WIDTH
+from const import C_ORANGE, WIN_WIDTH, MENU_OPTION, C_RED, C_WHITE, C_BLUE, BG_HEIGHT, BG_WIDTH
 
 
 class Menu:
@@ -19,6 +19,13 @@ class Menu:
         menu_option = 0
         pygame.mixer.music.load('./asset/menu.wav')
         pygame.mixer.music.play(-1)
+        # Carrega o som de movimento (passar pelas opções)
+        self.sound_move = pygame.mixer.Sound('asset/menu_click.wav')
+        self.sound_move.set_volume(1.0)
+
+        # Carrega o som de seleção (dar Enter / confirmar)
+        self.sound_select = pygame.mixer.Sound('asset/menu_select.wav')
+        self.sound_select.set_volume(0.6)
         while True:
 
             self.window.blit(source=self.surf, dest=self.rect)
@@ -41,14 +48,23 @@ class Menu:
                     if event.key == pygame.K_DOWN:
                         if menu_option < len(MENU_OPTION) - 1:
                             menu_option += 1
+
                         else:
                             menu_option = 0
-                    if event.key == pygame.K_UP:
+                        print('Tocando som')
+                        self.sound_move.play()  # 🔊 Toca o som ao mover para baixo
+
+
+                    elif event.key == pygame.K_UP:
                         if menu_option > 0:
                             menu_option -= 1
                         else:
                             menu_option = len(MENU_OPTION) - 1
-                    if event.key == pygame.K_RETURN:  # Enter
+                        self.sound_move.play()
+
+                    elif event.key == pygame.K_RETURN:  # Enter
+                        self.sound_select.play()
+                        pygame.time.wait(150)  # ⏱️ Aguarda 150ms para o som não ser cortado
                         return MENU_OPTION[menu_option]
 
     def show_controls(self):
@@ -58,7 +74,7 @@ class Menu:
             self.window.blit(self.surf, self.rect)
 
             # Título principal
-            self.menu_text(50, "CONTROLES", C_ORANGE, (WIN_WIDTH / 2, 40))
+            self.menu_text(50, "CONTROLS", C_ORANGE, (WIN_WIDTH / 2, 40))
 
             # --- COLUNA 1: AS TECLAS (Em Branco ou Amarelo para destacar) ---
             self.menu_text(24, "   ARROW RIGHT   :", C_WHITE, (WIN_WIDTH / 2 - 120, 140))

@@ -30,18 +30,28 @@ ENTITY_SPEED ={
     'LEVEL2BG2':1,
     'LEVEL2BG3':0,
     'LEVEL2BG4':0,
+    'LEVEL3BG0':1,
+    'LEVEL3BG1':0,
+    'LEVEL3BG2':0,
+    'LEVEL3BG3':0,
+    'LEVEL3BG4':0,
+    'LEVEL4BG0':1,
+    'LEVEL4BG1':1,
+    'LEVEL4BG2':0,
+    'LEVEL4BG3':0,
+    'LEVEL4BG4':0,
     'Player':2,
     'PlayerShot':3,
     'Enemy1':1,
     'Enemy1Shot':3,
     'Enemy2':1,
     'Enemy2Shot':3,
-    'Enemy3':1,
+    'Enemy3':2,
     'Enemy3Shot':3,
     'Enemy4':1,
-    'Enemy4Shot':2,
-    'Enemy5':1,
-    'Enemy5Shot':2
+    'Enemy4Shot':3,
+    'Enemy5':2,
+    'Enemy5Shot':3
 }
 
 ENTITY_HEALTH = {
@@ -55,18 +65,28 @@ ENTITY_HEALTH = {
     'LEVEL2BG2':999,
     'LEVEL2BG3':999,
     'LEVEL2BG4':999,
-    'Player': 3000,
+    'LEVEL3BG0':999,
+    'LEVEL3BG1':999,
+    'LEVEL3BG2':999,
+    'LEVEL3BG3':999,
+    'LEVEL3BG4':999,
+    'LEVEL4BG0':999,
+    'LEVEL4BG1':999,
+    'LEVEL4BG2':999,
+    'LEVEL4BG3':999,
+    'LEVEL4BG4':999,
+    'Player': 1200,
     'PlayerShot': 1,
-    'Enemy1': 90,
+    'Enemy1': 190,
     'Enemy1Shot': 1,
-    'Enemy2': 120,
+    'Enemy2': 210,
     'Enemy2Shot': 1,
-    'Enemy3': 70,
+    'Enemy3': 220,
     'Enemy3Shot': 1,
-    'Enemy4':115,
+    'Enemy4':235,
     'Enemy4Shot':1,
-    'Enemy5':100,
-    'Enemy5Shot':1
+    'Enemy5':225,
+    'Enemy5Shot':2
 
 }
 
@@ -81,18 +101,28 @@ ENTITY_DAMAGE = {
     'LEVEL2BG2':0,
     'LEVEL2BG3':0,
     'LEVEL2BG4':0,
+    'LEVEL3BG0':0,
+    'LEVEL3BG1':0,
+    'LEVEL3BG2':0,
+    'LEVEL3BG3':0,
+    'LEVEL3BG4':0,
+    'LEVEL4BG0':0,
+    'LEVEL4BG1':0,
+    'LEVEL4BG2':0,
+    'LEVEL4BG3':0,
+    'LEVEL4BG4':0,
     'Player': 1,
-    'PlayerShot': 30,
+    'PlayerShot': 40,
     'Enemy1': 1,
-    'Enemy1Shot':50,
+    'Enemy1Shot':35,
     'Enemy2': 1,
-    'Enemy2Shot':25,
+    'Enemy2Shot':40,
     'Enemy3': 1,
-    'Enemy3Shot':75,
+    'Enemy3Shot':55,
     'Enemy4':1,
-    'Enemy4Shot':65,
+    'Enemy4Shot':60,
     'Enemy5':1,
-    'Enemy5Shot':70
+    'Enemy5Shot':55
 }
 
 ENTITY_SCORE = {
@@ -106,32 +136,42 @@ ENTITY_SCORE = {
     'LEVEL2BG2':0,
     'LEVEL2BG3':0,
     'LEVEL2BG4':0,
+    'LEVEL3BG0':0,
+    'LEVEL3BG1':0,
+    'LEVEL3BG2':0,
+    'LEVEL3BG3':0,
+    'LEVEL3BG4':0,
+    'LEVEL4BG0':0,
+    'LEVEL4BG1':0,
+    'LEVEL4BG2':0,
+    'LEVEL4BG3':0,
+    'LEVEL4BG4':0,
     'Player': 0,
     'PlayerShot': 0,
-    'Enemy1':100,
+    'Enemy1':80,
     'Enemy1Shot':0,
-    'Enemy2':125,
+    'Enemy2':100,
     'Enemy2Shot':0,
-    'Enemy3':175,
+    'Enemy3':140,
     'Enemy3Shot':0,
-    'Enemy4':200,
+    'Enemy4':170,
     'Enemy4Shot':0,
-    'Enemy5':220,
+    'Enemy5':190,
     'Enemy5Shot':0
 }
 
 ENTITY_SHOOT_DELAY = {
-    'Player': 10,
+    'Player': 20,
     'Enemy1': 80,
     'Enemy2': 100,
-    'Enemy3': 90,
-    'Enemy4': 95,
+    'Enemy3': 100,
+    'Enemy4': 100,
     'Enemy5': 100,
 }
 
 
 #G
-GRAVITY = 1.5
+GRAVITY = 1.4
 FLOOR_Y = 325
 
 
@@ -155,7 +195,7 @@ WIN_HEIGHT = 324
 
 #S
 
-SPAWN_TIME =3000
+SPAWN_TIME =2800
 SCORE_POS ={'Title': (WIN_WIDTH/2,50),
             'EnterName': (WIN_WIDTH/2,80),
             'Label':(WIN_WIDTH/2,90),
@@ -173,4 +213,4 @@ SCORE_POS ={'Title': (WIN_WIDTH/2,50),
             }
 #T
 TIMEOUT_STEP = 100
-TIMEOUT_LEVEL = 20000 # = 20 SEGUNDOS
+TIMEOUT_LEVEL = 50000 # = 50 SEGUNDOS

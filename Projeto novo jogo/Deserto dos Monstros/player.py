@@ -35,10 +35,13 @@ class Player(Entity):
 
         pass
     def jump(self):
+        self.sound_jump = pygame.mixer.Sound('asset/jump_player.wav')
+        self.sound_jump.set_volume(1.0)
         #Faz o jogador pular se estiver no chão
         if self.on_ground:
-            self.speed_y = -20
+            self.speed_y = -22
             self.on_ground = False
+            self.sound_jump.play()
 
     def update(self):
         # Aplica gravidade
@@ -57,23 +60,34 @@ class Player(Entity):
 
 
     def shoot(self):
-        self.shot_delay -= 1
-        if self.shot_delay == 0:
+
+        if self.shot_delay > 0:
+            self.shot_delay -= 1
+
+        #  Captura o estado da tecla
+        pressed_key = pygame.key.get_pressed()
+        is_shooting_now = pressed_key[PLAYER_KEY_SHOOT[self.name]]
+
+        #  Só atira se o delay estiver zerado E a tecla acabou de ser apertada
+        if self.shot_delay == 0 and is_shooting_now and not self.shot_pressed_last_frame:
+
+            # Reinicia o delay (cooldown)
             self.shot_delay = ENTITY_SHOOT_DELAY[self.name]
-            pressed_key = pygame.key.get_pressed()
-            if pressed_key[PLAYER_KEY_SHOOT[self.name]]:
-                gun_offset_x = self.rect.width - 7
-                gun_offset_y = 33
 
-                shot_x = self.rect.x + gun_offset_x
-                shot_y = self.rect.y + gun_offset_y
+            # Lógica do tiro
+            gun_offset_x = self.rect.width - 7
+            gun_offset_y = 33
+            shot_x = self.rect.x + gun_offset_x
+            shot_y = self.rect.y + gun_offset_y
 
-                #SOM DOS TIROS
-                if hasattr(self, 'shoot_sound') and self.shoot_sound is not None:
-                    self.shoot_sound.play()
+            # Som
+            if hasattr(self, 'shoot_sound') and self.shoot_sound is not None:
+                self.shoot_sound.play()
 
+            # Atualiza o estado da tecla para não atirar continuamente
+            self.shot_pressed_last_frame = is_shooting_now
+            return PlayerShot(name=f'{self.name}Shot', position=(shot_x, shot_y))
 
-                return PlayerShot(name=f'{self.name}Shot', position=(shot_x, shot_y))
-
-
-            return None
+        # 4. Atualiza o estado da tecla para o próximo frame
+        self.shot_pressed_last_frame = is_shooting_now
+        return None

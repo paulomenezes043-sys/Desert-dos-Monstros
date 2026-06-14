@@ -25,10 +25,22 @@ class EntityFactory:
                     list_bg.append(Background(f'LEVEL2BG{i}', (0, 0)))
                     list_bg.append(Background(f'LEVEL2BG{i}', (WIN_WIDTH, 0)))
                 return list_bg
+            case 'LEVEL3BG':
+                list_bg = []
+                for i in range(5):  # level 2
+                    list_bg.append(Background(f'LEVEL3BG{i}', (0, 0)))
+                    list_bg.append(Background(f'LEVEL3BG{i}', (WIN_WIDTH, 0)))
+                return list_bg
+            case 'LEVEL4BG':
+                list_bg = []
+                for i in range(5):  # level 2
+                    list_bg.append(Background(f'LEVEL4BG{i}', (0, 0)))
+                    list_bg.append(Background(f'LEVEL4BG{i}', (WIN_WIDTH, 0)))
+                return list_bg
             case 'Player':
                 # Se passares uma posição específica no nível, ele usa. Se não, usa a padrão atual:
                 pos = position if position else (5, WIN_WIDTH / 2 - 30,
-                                                 WIN_HEIGHT - 10)  # Nota: verifica se querias mesmo 3 argumentos aqui na tua tupla do Player
+                                                 WIN_HEIGHT - 10)
                 return Player(name='Player', position=pos)
 
             case 'Enemy1':
